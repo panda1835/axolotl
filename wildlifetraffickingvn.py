@@ -15,6 +15,7 @@ import dash_leaflet.express as dlx
 from dash import Dash, html, Output, Input
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 
@@ -422,7 +423,7 @@ def display_daily_expenses(start_date, start_month, start_year,
         filter_df = filter_df[filter_df['online_offline'] == on_off]
 
     display_location = location_database[location_database['location'].isin(filter_df['location'])]
-    return dlx.geojson_to_geobuf(dlx.dicts_to_geojson([dict(lat=i+random.random(), lon=j+random.random()) for i,j in zip(display_location['lat'], display_location['lon'])]))
+    return dlx.geojson_to_geobuf(dlx.dicts_to_geojson([dict(lat=i+random.random()/100, lon=j+random.random()/100) for i,j in zip(display_location['lat'], display_location['lon'])]))
 
 
 
